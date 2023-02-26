@@ -9,14 +9,10 @@ import Next from "../assets/Next.png";
 
 const MyPlayer = () => {
   const tracklist = useSelector((state) => state?.songsData?.playAlbum);
+  console.log(tracklist);
   return (
     <Container fluid className="fixed-bottom bg-container pt-1 ">
       <Row>
-        <Col style={{ zIndex: "10" }}>
-          <img src={tracklist.cover_sm} alt="shuffle" />
-          <p>{tracklist.title} </p>
-          <p> </p>
-        </Col>
         <Col sm={8} className="offset-lg-2">
           <Row>
             <Col

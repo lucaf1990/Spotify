@@ -26,7 +26,7 @@ const RockCard = ({ endPoint }) => {
         <OnLoadErorr />
       ) : (
         cards
-          .slice(0, 4)
+          .slice(11, 15)
           .map((singl) => <SingleCard key={singl.id} singCrd={singl} />)
       )}
     </>

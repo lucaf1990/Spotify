@@ -4,6 +4,10 @@ import AllCards from "./Components/AllCards";
 import MyNavBar from "./Components/MyNavBar";
 import MyPlayer from "./Components/MyPlayer";
 import Album from "./Components/Album";
+import Artist from "./Components/Artist";
+import SearchResaults from "./Components/SearchResaults";
+import MyFav from "./Components/MyFav";
+
 function App() {
   return (
     <div className="App">
@@ -12,6 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<AllCards />} />
           <Route path="/Album" element={<Album />} />
+          <Route path="/Artist" element={<Artist />} />
+          <Route path="/SearchResults" element={<SearchResaults />} />
+          <Route path="/MyFavourite" element={<MyFav />} />
         </Routes>
         <MyPlayer />
       </BrowserRouter>

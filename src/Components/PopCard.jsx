@@ -25,7 +25,7 @@ const PopCard = ({ endPoint }) => {
         <OnLoadErorr />
       ) : (
         cards
-          .slice(0, 4)
+          .slice(5, 9)
           .map((singl) => <SingleCard key={singl.id} singCrd={singl} />)
       )}
     </>

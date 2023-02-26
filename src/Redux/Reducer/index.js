@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import {
   ROCK_CARD,
   POP_CARD,
@@ -9,6 +8,9 @@ import {
   SPECIFIC_CARD,
   ALL_TRACKS,
   PLAY_ALBUM,
+  SEARCH_RESULTS,
+  MY_FAV_SONGS,
+  REMOVE_FROM_FAV,
 } from "../Action";
 
 const initialState = {
@@ -23,6 +25,8 @@ const initialState = {
   cardId: null,
   tracks: {},
   playAlbum: {},
+  searchResult: "",
+  myFavSongs: [],
 };
 
 const CardsReducer = (state = initialState, action) => {
@@ -36,6 +40,16 @@ const CardsReducer = (state = initialState, action) => {
       return {
         ...state,
         tracks: action.payload,
+      };
+    case MY_FAV_SONGS:
+      return {
+        ...state,
+        myFavSongs: [...state.myFavSongs, action.payload],
+      };
+    case REMOVE_FROM_FAV:
+      return {
+        ...state,
+        myFavSongs: state.myFavSongs.filter((_, i) => i !== action.payload),
       };
     case ROCK_CARD:
       return {
@@ -64,6 +78,8 @@ const CardsReducer = (state = initialState, action) => {
       return { ...state, hasError: true };
     case CARD_ID:
       return { ...state, cardId: action.payload };
+    case SEARCH_RESULTS:
+      return { ...state, searchResult: action.payload };
 
     default:
       return state;

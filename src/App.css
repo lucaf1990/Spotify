@@ -8,11 +8,18 @@ body {
   );
   color: white;
 }
+
+#trackList {
+  width: 400px;
+}
 .player-icons {
   position: absolute;
   top: 20px;
   left: 0;
   z-index: 1;
+}
+.player-icons:hover {
+  scale: 1.02;
 }
 .mainPage {
   width: calc(100vw - 360px);

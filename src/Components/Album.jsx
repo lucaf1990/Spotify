@@ -1,9 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { Container, Col, Row, Button } from "react-bootstrap";
-import { ALL_TRACKS, HAS_ERROR, IS_LOADING, PLAY_ALBUM } from "../Redux/Action";
+import {
+  ALL_TRACKS,
+  HAS_ERROR,
+  IS_LOADING,
+  MY_FAV_SONGS,
+  PLAY_ALBUM,
+} from "../Redux/Action";
 import { useEffect } from "react";
 import Loading from "./Loading";
 import OnLoadErorr from "./OnLoadError";
+import { BiStar } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Album = () => {
   const specific = useSelector((state) => state?.songsData?.specificCard);
@@ -14,9 +23,18 @@ const Album = () => {
   function formatDuration(duration) {
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
+
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
+  const [starStates, setStarStates] = useState(
+    Array(tracklist.length).fill(false)
+  );
 
+  const handleFavClick = (index) => {
+    const newStarStates = [...starStates];
+    newStarStates[index] = !newStarStates[index];
+    setStarStates(newStarStates);
+  };
   const handleClick = () => {
     dispatch({
       type: PLAY_ALBUM,
@@ -80,19 +98,21 @@ const Album = () => {
               <Row className="mb-3 d-flex">
                 <Col
                   md={12}
-                  className=" ms-5 pt-5 text-center"
+                  className=" ms-5 pt-5 text-center sticky-top"
                   id="img-container"
                 >
                   <img
-                    className="sticky-top mt-5"
+                    className=" mt-5"
                     style={{ top: "50px" }}
                     src={specific?.album?.cover_medium}
                     alt={specific?.album?.title_short}
                   />
-                  <p className="sticky-top mt-3">{specific?.album?.title}</p>
-                  <p className="sticky-top " style={{ top: "20px" }}>
-                    {specific?.artist?.name}
-                  </p>
+                  <p className=" mt-3">{specific?.album?.title}</p>
+                  <Link to={"/Artist"}>
+                    <p className=" " style={{ top: "20px" }}>
+                      {specific?.artist?.name}
+                    </p>
+                  </Link>
                   <Button
                     style={{
                       borderRadius: "40px",
@@ -114,14 +134,29 @@ const Album = () => {
                 </Col>{" "}
               </Row>
               <Row style={{ marginLeft: "50px" }}>
-                <Col md={12} className="px-md-5">
-                  {tracklist.tracks?.data.map((title) => (
+                <Col className="px-md-5">
+                  {tracklist.tracks?.data.map((title, index) => (
                     <Row
                       key={title.id}
                       className="mb-5 mt-2 m-5"
                       id="trackList"
                     >
-                      <Col xs={11}> {title.title} </Col>
+                      <Col xs={1}>
+                        <BiStar
+                          style={{
+                            fontSize: "1.2em",
+                            color: starStates[index] ? "gold" : "white",
+                          }}
+                          onClick={() => {
+                            handleFavClick(index);
+                            dispatch({
+                              type: MY_FAV_SONGS,
+                              payload: title,
+                            });
+                          }}
+                        />
+                      </Col>
+                      <Col xs={10}> {title.title} </Col>
                       <Col xs={1}>{formatDuration(title.duration)} </Col>
                     </Row>
                   ))}
