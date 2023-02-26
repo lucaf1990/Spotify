@@ -22,7 +22,7 @@ const initialState = {
   isLoading: true,
   cardId: null,
   tracks: {},
-  playALbum: {},
+  playAlbum: {},
 };
 
 const CardsReducer = (state = initialState, action) => {
@@ -30,7 +30,7 @@ const CardsReducer = (state = initialState, action) => {
     case PLAY_ALBUM:
       return {
         ...state,
-        playALbum: action.payload,
+        playAlbum: action.payload,
       };
     case ALL_TRACKS:
       return {

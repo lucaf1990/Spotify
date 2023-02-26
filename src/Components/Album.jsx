@@ -17,12 +17,12 @@ const Album = () => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
 
-  function handleClick() {
+  const handleClick = () => {
     dispatch({
       type: PLAY_ALBUM,
       payload: tracklist,
     });
-  }
+  };
   useEffect(() => {
     const fetchAlbum = async () => {
       try {
@@ -31,6 +31,7 @@ const Album = () => {
         );
         if (res.ok) {
           let data = await res.json();
+          console.log(data);
           dispatch({
             type: ALL_TRACKS,
             payload: data,
@@ -103,7 +104,7 @@ const Album = () => {
                       fontSize: "1em",
                       fontWeight: "bold",
                       position: "fixed",
-                      left: "340px",
+                      left: "360px",
                     }}
                     onClick={handleClick}
                     class="btn"

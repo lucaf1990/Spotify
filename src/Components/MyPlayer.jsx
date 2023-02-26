@@ -1,19 +1,23 @@
-import {
-  faPlayCircle,
-  faRepeat,
-  faSackDollar,
-  faShuffle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import shuffle from "../assets/Shuffle.png";
+import Play from "../assets/Play.png";
+import Previuos from "../assets/Previous.png";
+import Repeat from "../assets/Repeat.png";
+import Next from "../assets/Next.png";
 
 const MyPlayer = () => {
-  const tracklist = useSelector((state) => state?.songsData?.tracks);
+  const tracklist = useSelector((state) => state?.songsData?.playAlbum);
   return (
-    <Container fluid className="fixed-bottom bg-container pt-1">
+    <Container fluid className="fixed-bottom bg-container pt-1 ">
       <Row>
-        <Col lg={10} className="offset-lg-2">
+        <Col style={{ zIndex: "10" }}>
+          <img src={tracklist.cover_sm} alt="shuffle" />
+          <p>{tracklist.title} </p>
+          <p> </p>
+        </Col>
+        <Col sm={8} className="offset-lg-2">
           <Row>
             <Col
               xs={6}
@@ -22,31 +26,21 @@ const MyPlayer = () => {
               className="offset-3 offset-md-4 offset-lg-5 playerControls mt-1"
             >
               <Row>
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faShuffle}
-                  size="lg"
-                />
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faSackDollar}
-                  size="lg"
-                />
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faPlayCircle}
-                  size="lg"
-                />
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faShuffle}
-                  size="lg"
-                />
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faRepeat}
-                  size="lg"
-                />
+                <Link href="#">
+                  <img src={shuffle} alt="shuffle" />
+                </Link>
+                <Link href="#">
+                  <img src={Previuos} alt="previous" />
+                </Link>
+                <Link href="#">
+                  <img src={Play} alt="play" />
+                </Link>
+                <Link href="#">
+                  <img src={Next} alt="next" />
+                </Link>
+                <Link href="#">
+                  <img src={Repeat} alt="repeat" />
+                </Link>
               </Row>
             </Col>
           </Row>
@@ -68,4 +62,5 @@ const MyPlayer = () => {
     </Container>
   );
 };
+
 export default MyPlayer;

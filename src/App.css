@@ -8,7 +8,12 @@ body {
   );
   color: white;
 }
-
+.player-icons {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 1;
+}
 .mainPage {
   width: calc(100vw - 360px);
 }
