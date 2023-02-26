@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { HAS_ERROR, IS_LOADING } from "../Redux/Action";
+import { HAS_ERROR, IS_LOADING, SPECIFIC_CARD } from "../Redux/Action";
 import Loading from "./Loading";
 
 import { Link } from "react-router-dom";
@@ -91,13 +91,29 @@ const SearchResaults = () => {
             ) : (
               songs?.data?.map((singl) => (
                 <Col xs={4} md={4} key={singl.id} className="my-3">
-                  <Link to={"/Album"}>
+                  <Link
+                    to={"/Album"}
+                    onClick={() => {
+                      dispatch({
+                        type: SPECIFIC_CARD,
+                        payload: singl,
+                      });
+                    }}
+                  >
                     <img src={singl.album.cover_big} alt={singl.album.title} />
                     <p className="mt-2 text-truncate ">
                       Album: {singl.album.title}
                     </p>
                   </Link>
-                  <Link to={"/Artist"}>
+                  <Link
+                    to={"/Artist"}
+                    onClick={() => {
+                      dispatch({
+                        type: SPECIFIC_CARD,
+                        payload: singl,
+                      });
+                    }}
+                  >
                     <p>Artist: {singl.artist.name}</p>
                   </Link>
                 </Col>
